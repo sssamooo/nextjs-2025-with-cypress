@@ -22,7 +22,7 @@ export default async function Home() {
         <p className="text-4xl font-bold">Spotify</p>
         <div className="grid grid-cols-2 gap-4">
           {albums.map((album) => (
-            <div key={album.id} className="card w-64 bg-base-100 shadow-sm">
+            <div key={album.id} className="card w-64 bg-base-100 shadow-sm" data-cy="album-card">
               <div className="card-body">
                 <span className="badge badge-xs badge-warning">Pop</span>
                 <h2 className="text-3xl font-bold">{album.name}</h2>
@@ -41,6 +41,7 @@ export default async function Home() {
                   <Link
                     className="btn btn-primary btn-block"
                     href={`/album/${album.id}`}
+                    data-cy="album-detail-button"
                   >
                     Detail
                   </Link>
