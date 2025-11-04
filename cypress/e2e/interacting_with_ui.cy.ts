@@ -1,11 +1,10 @@
 describe('Album Catalog - Interactions', () => {
     it('looks for songs when searching via search bar', () => {
         cy.visit('/');
-        const searchTerm = 'songs';
-        cy.get('[data-cy="search-input"]').type(searchTerm);
+        const search = 'songs';
+        cy.get('[data-cy="search-input"]').type(search);
         cy.get('[data-cy="search-button"]').click();
-        cy.url().should('include', `q=${searchTerm}`);
-
+        cy.url().should('include', `q=${search}`);
     });
 
     it('navigates to the first album detail', () => {
@@ -22,11 +21,23 @@ describe('Album Catalog - Interactions', () => {
 
     it('searches for albums using the search bar', () => {
         cy.visit('/');
-        const searchTerm = 'album';
-        cy.get('[data-cy="search-input"]').type(searchTerm);
+        const search = 'album';
+        cy.get('[data-cy="search-input"]').type(search);
         cy.get('[data-cy="search-button"]').click();
-        cy.url().should('include', `q=${searchTerm}`);
+        cy.url().should('include', `q=${search}`);
     });
 
-    
+    it('navigates to author page from album card', () => {
+        cy.visit('/');
+        cy.get('[data-cy="album-card"]').first().within(() => {
+            cy.get('[data-cy="author-link"]').click();
+            cy.url().should('include', `/author/`);
+        });
+    });
+
+    it("no album url shows no album found div", () => {
+        cy.visit('/album/50000');
+        cy.get('[data-cy="no-album-error"]').should('be.visible')
+    });
+
 });

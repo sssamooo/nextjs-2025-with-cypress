@@ -30,7 +30,8 @@ export default async function Home() {
                 <p>ID: {album.id}</p>
                 <p>
                   Author:{" "}
-                  <Link href={`/author/${album.author_id}`}>
+                  <Link href={`/author/${album.author_id}`}
+                  data-cy="author-link">
                     {album.author_name}
                   </Link>
                 </p>
